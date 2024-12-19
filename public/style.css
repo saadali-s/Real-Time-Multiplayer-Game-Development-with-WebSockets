@@ -1,0 +1,66 @@
+/* General layout */
+body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #ede6e3;
+    margin: 0;
+    height: 100%;
+}
+
+#center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+#game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    perspective: 600px;
+}
+
+#maze {
+    position: relative;
+    width: 350px;
+    height: 315px;
+    border: 5px solid #36382e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#end {
+    width: 65px;
+    height: 65px;
+    border: 5px dashed #7d82b8;
+    border-radius: 50%;
+}
+
+#joystick {
+    position: relative;
+    background-color: #210124;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    margin-top: 20px;
+}
+
+#joystick-head {
+    background-color: #f06449;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.ball {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #f06449;
+    border-radius: 50%;
+}

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Game</title>
+</head>
+<body>
+    <h1>Multiplayer Game</h1>
+    <button id="btnCreate">New Game</button>
+
+    <script>
+        // Initialize clientId as null
+        let clientId = null;
+
+        // Establish WebSocket connection
+        let ws = new WebSocket("ws://localhost:9090");
+        const btnCreate = document.getElementById("btnCreate");
+
+        // Handle button click to create a new game
+        btnCreate.addEventListener("click", () => {
+            const payload = {
+                "method": "create",
+                "clientId": clientId
+            };
+            ws.send(JSON.stringify(payload)); // Send the create request to the server
+        });
+
+        // Handle messages from the server
+        ws.onmessage = (message) => {
+            const response = JSON.parse(message.data);
+
+            // Handle "connect" method response
+            if (response.method === "connect") {   
+                clientId = response.clientId; // Set the client ID
+                console.log("Client ID set successfully: " + clientId);
+            }
+
+            // Handle "create" method response
+            if (response.method === "create") {
+                console.log(
+                    `Game created with ID: ${response.game.id} and ${response.game.balls} balls`
+                );
+            }
+        };
+    </script>
+</body>
+</html>
