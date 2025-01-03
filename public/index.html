@@ -3,46 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multiplayer Game</title>
+    <title>Multiplayer Maze Game</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Multiplayer Game</h1>
+    <h1>Multiplayer Maze Game</h1>
     <button id="btnCreate">New Game</button>
-
-    <script>
-        // Initialize clientId as null
-        let clientId = null;
-
-        // Establish WebSocket connection
-        let ws = new WebSocket("ws://localhost:9090");
-        const btnCreate = document.getElementById("btnCreate");
-
-        // Handle button click to create a new game
-        btnCreate.addEventListener("click", () => {
-            const payload = {
-                "method": "create",
-                "clientId": clientId
-            };
-            ws.send(JSON.stringify(payload)); // Send the create request to the server
-        });
-
-        // Handle messages from the server
-        ws.onmessage = (message) => {
-            const response = JSON.parse(message.data);
-
-            // Handle "connect" method response
-            if (response.method === "connect") {   
-                clientId = response.clientId; // Set the client ID
-                console.log("Client ID set successfully: " + clientId);
-            }
-
-            // Handle "create" method response
-            if (response.method === "create") {
-                console.log(
-                    `Game created with ID: ${response.game.id} and ${response.game.balls} balls`
-                );
-            }
-        };
-    </script>
+    <div id="center">
+        <div id="game">
+            <div id="maze">
+                <div id="end"></div>
+                <div id="joystick-head"></div>
+            </div>
+            <div id="joystick">
+                <div class="joystick-arrow"></div>
+                <div class="joystick-arrow"></div>
+                <div class="joystick-arrow"></div>
+                <div class="joystick-arrow"></div>
+            </div>
+            <div id="note">Click the joystick to start!</div>
+        </div>
+    </div>
+    <script src="game.js"></script>
 </body>
 </html>
